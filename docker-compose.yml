@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    container_name: "mongodb"
+    ports:
+    - 27017:27017
+  app:
+    image: valou5940/sarbacane
+    ports: 
+    - 8080:8080
+    - 8000:8000
+    depends_on:
+    - mongodb
