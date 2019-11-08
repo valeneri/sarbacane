@@ -116,7 +116,9 @@ public class RecipientServiceImpl implements RecipientService {
 	 */
 	public boolean checkValidPhone(String phone) {
 		
-		if (phone.length() != 10) {
+		if (phone.isEmpty()) {
+			return false;
+		} else if (phone.length() != 10) {
 			return false;
 		} else if (!phone.matches("\\d+")) {
 			return false;
@@ -136,7 +138,9 @@ public class RecipientServiceImpl implements RecipientService {
 	 */
 	public boolean checkValidMail(String email) {
 		
-		if (!email.matches(EMAIL_REGEXP)) {
+		if (email.isEmpty()) {
+			return false;
+		} else if (!email.matches(EMAIL_REGEXP)) {
 			return false;
 		} else {
 			return true;

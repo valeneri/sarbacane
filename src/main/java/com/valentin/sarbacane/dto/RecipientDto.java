@@ -1,7 +1,13 @@
 package com.valentin.sarbacane.dto;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "recipients")
+//@CompoundIndexes({ @CompoundIndex(name = "email_phone", def = "{'email': 1, 'phone': 1}") })
 public class RecipientDto {
 	
 	@Id
@@ -52,7 +58,18 @@ public class RecipientDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	
 
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 }
