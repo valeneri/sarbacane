@@ -1,21 +1,21 @@
 package com.valentin.sarbacane.exceptions;
 
-public class InvalidFileException extends SarbacaneException {
+public class EmptyFileException extends SarbacaneException{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public InvalidFileException() {
-		super("INVALID_FILE_FORMAT", "415");
+	public EmptyFileException() {
+		super("EMPTY_FILE", "400");
 	}
 	/**
 	 * 
 	 * @param message
 	 * @param code
 	 */
-	public InvalidFileException(String message, String code) {
+	public EmptyFileException(String message, String code) {
 		super(message, code);
 	}
 

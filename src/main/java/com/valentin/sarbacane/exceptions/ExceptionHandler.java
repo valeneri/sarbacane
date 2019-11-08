@@ -1,28 +1,22 @@
 package com.valentin.sarbacane.exceptions;
 
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler{
 
-	 @ExceptionHandler(InvalidFileException.class)
-	  public final ResponseEntity<SarbacaneException> handleInvalidFileException(InvalidFileException ex) {
-		 
-		SarbacaneException exception = new SarbacaneException();
-		exception.setMessage("INVALID_FILE_FORMAT");
-		exception.setCode("415");
-	    return new ResponseEntity(exception, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+	 @org.springframework.web.bind.annotation.ExceptionHandler(InvalidFileException.class)
+	  public final ResponseEntity<ErrorResponse> handleInvalidFileException(InvalidFileException ex) {
+		ErrorResponse error = new ErrorResponse(ex.getMessage(), ex.getCode());
+	    return new ResponseEntity<>(error, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	  }
 	 
-	 @ExceptionHandler(NoFileException.class)
-	 public final ResponseEntity<SarbacaneException> handleNoFileExcpetion(NoFileException ex) {
-		 SarbacaneException exception = new SarbacaneException();
-		 exception.setMessage("NO_FILE_PROVIDED");
-		 exception.setCode("400");
-		 return new ResponseEntity(exception, HttpStatus.BAD_REQUEST);
+	 @org.springframework.web.bind.annotation.ExceptionHandler(EmptyFileException.class)
+	 public final ResponseEntity<ErrorResponse> handleEmptyFileException(EmptyFileException ex) {
+		 ErrorResponse error = new ErrorResponse(ex.getMessage(), ex.getCode());
+		 return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	 }
 }

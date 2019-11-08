@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.valentin.sarbacane.dto.CounterDto;
 import com.valentin.sarbacane.exceptions.InvalidFileException;
-import com.valentin.sarbacane.exceptions.NoFileException;
+import com.valentin.sarbacane.exceptions.EmptyFileException;
 import com.valentin.sarbacane.exceptions.SarbacaneException;
 import com.valentin.sarbacane.services.RecipientService;
 
@@ -36,10 +36,10 @@ public class RecipientController {
 	@PostMapping("/upload")
 	public CounterDto saveRecipientFromFile(@RequestParam("csvFile") MultipartFile csvFile) throws SarbacaneException {
 		
-		if (csvFile == null) {
-			throw new NoFileException();
+		if (csvFile.isEmpty()) {
+			throw new EmptyFileException();
 		}
-		else if(csvFile.getOriginalFilename().endsWith(".csv")) {
+		else if(!csvFile.getOriginalFilename().endsWith(".csv")) {
 			throw new InvalidFileException();
 		} else {
 			return recipientService.saveRecipientFromFile(csvFile);

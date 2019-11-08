@@ -1,26 +1,19 @@
 package com.valentin.sarbacane.exceptions;
 
-public class SarbacaneException extends RuntimeException {
+public class ErrorResponse {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String message;
 	private String code;
 	
-	/**
-	 * 
-	 */
-	public SarbacaneException() {
-		super();
+	public ErrorResponse() {
+		
 	}
-
 	/**
 	 * @param message
 	 * @param code
 	 */
-	public SarbacaneException(String message, String code) {
+	public ErrorResponse(String message, String code) {
+		super();
 		this.message = message;
 		this.code = code;
 	}
@@ -48,4 +41,7 @@ public class SarbacaneException extends RuntimeException {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	
+
 }
