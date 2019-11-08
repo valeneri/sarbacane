@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.valentin.sarbacane.dto.CounterDto;
+import com.valentin.sarbacane.exceptions.InvalidFileException;
+import com.valentin.sarbacane.exceptions.NoFileException;
+import com.valentin.sarbacane.exceptions.SarbacaneException;
 import com.valentin.sarbacane.services.RecipientService;
 
 @RestController
@@ -18,10 +21,29 @@ public class RecipientController {
 	@Autowired
 	private RecipientService recipientService;
 	
+	/**
+	 * saveRecipientFromFile method will pass the file to the service, if its the right format, else throws exception
+	 * 
+	 * @param csvFile
+	 * 				file from the client
+	 * 
+	 * @return CounterDto
+	 * 				valid/invalid entries
+	 * 
+	 * @throws SarbacaneException
+	 * 				if file is not .csv or if no file
+	 */
 	@PostMapping("/upload")
-	public CounterDto saveRecipientFromFile(@RequestParam("csvFile") MultipartFile csvFile) {
+	public CounterDto saveRecipientFromFile(@RequestParam("csvFile") MultipartFile csvFile) throws SarbacaneException {
 		
-		return recipientService.saveRecipientFromFile(csvFile);
+		if (csvFile == null) {
+			throw new NoFileException();
+		}
+		else if(csvFile.getOriginalFilename().endsWith(".csv")) {
+			throw new InvalidFileException();
+		} else {
+			return recipientService.saveRecipientFromFile(csvFile);
+		}
 	}		
 
 }
