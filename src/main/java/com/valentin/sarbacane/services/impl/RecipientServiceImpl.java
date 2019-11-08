@@ -36,6 +36,7 @@ public class RecipientServiceImpl implements RecipientService {
 		
 		Integer valid = 0;
 		Integer invalid = 0;
+		Integer total = 0;
 		
 		try {
 			BufferedReader fileReader = new BufferedReader(new InputStreamReader(csvFile.getInputStream()));
@@ -62,6 +63,7 @@ public class RecipientServiceImpl implements RecipientService {
 						recipientSet.add(recipient);
 					}
 				}
+				total++;
 			}
 			fileReader.close();
 		} catch (IOException e) {
@@ -73,7 +75,7 @@ public class RecipientServiceImpl implements RecipientService {
 		List<RecipientDto> recipientListReturned = recipientRepository.saveAll(recipientList);
 
 		valid = recipientListReturned.size();
-		invalid = recipientSet.size() - valid;
+		invalid = total - recipientListReturned.size();
 		
 		counterDto.setValid(valid);
 		counterDto.setInvalid(invalid);
