@@ -1,7 +1,11 @@
 package com.valentin.sarbacane.dto;
 
+import org.springframework.data.annotation.Id;
+
 public class RecipientDto {
 	
+	@Id
+	private String id;
 	private String email;
 	private String phone;
 	
