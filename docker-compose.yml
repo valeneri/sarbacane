@@ -3,7 +3,6 @@ version: '3.1'
 services:
   sarbacane:
     build: .
-    restart: always
     container_name: sarbacane
     ports:
       - 8080:8080
@@ -17,7 +16,4 @@ services:
     container_name: mongodb
     ports:
       - 27017:27017
-    volumes:
-      - $HOME/data/springboot-mongo-data:/data/db
-      - $HOME/data/springboot-mongo-bkp:/data/bkp
-    restart: always
+    
