@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  sarbacane:
+    build: .
+    container_name: sarbacane
+    ports:
+      - 8080:8080
+      - 8000:8000
+    working_dir: /opt/app
+    depends_on:
+      - mongo
+  
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    
