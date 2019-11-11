@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,7 +59,11 @@ public class RecipientControllerTest {
 		final String baseUrl = "http://localhost:" + randomServerPort + "/documents/upload";
 		URI uri = new URI(baseUrl);
 
-		MockMultipartFile mockCsvFile = new MockMultipartFile("csvFile", "recipient.txt", "text/csv", "email;phone\n test2@gmail.com;0632147590\n test3@gmail.com;0686829876".getBytes());
+		StringBuilder csv = new StringBuilder(); 
+		csv.append("email;phone\r\n");
+		csv.append("test2@gmail.com;0632147590\r");
+		  
+		MockMultipartFile mockCsvFile = new MockMultipartFile("csvFile", "recipient.csv", "text/csv", csv.toString().getBytes());
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 

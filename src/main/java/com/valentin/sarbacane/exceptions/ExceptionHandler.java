@@ -19,4 +19,10 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		 ErrorResponse error = new ErrorResponse(ex.getMessage(), ex.getCode());
 		 return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	 }
+	 
+	 @org.springframework.web.bind.annotation.ExceptionHandler(InvalidColumnsException.class)
+	 public final ResponseEntity<ErrorResponse> handleInvalidColumnsException(InvalidColumnsException ex) {
+		 ErrorResponse error = new ErrorResponse(ex.getMessage(), ex.getCode());
+		 return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+	 }
 }

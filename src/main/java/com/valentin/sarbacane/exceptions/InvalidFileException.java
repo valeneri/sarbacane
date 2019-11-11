@@ -18,5 +18,4 @@ public class InvalidFileException extends SarbacaneException {
 	public InvalidFileException(String message, String code) {
 		super(message, code);
 	}
-
 }
