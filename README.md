@@ -1,5 +1,6 @@
 # sarbacane
 Upload a .csv file (with emails and phones) into a mongodb database
+
 #PREREQUISITES
 You need apache maven and docker installed on your machine
 
